@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МАЙЯ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .main-container {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+        }
+        
+        .maya-text {
+            font-size: 18vw;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            background: linear-gradient(45deg, 
+                #ff3366, #ff9933, #ffcc33, 
+                #33ff66, #33ccff, #9933ff, 
+                #ff33cc, #ff3366);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 8s ease infinite;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+        
+        .sub-text {
+            font-size: 2.5vw;
+            color: #333;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+            margin-top: 20px;
+            transition: all 0.5s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .sub-text:hover {
+            transform: scale(1.05);
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Декоративные элементы для красоты */
+        .decoration {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .decoration:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff3366, #ff9933);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .decoration:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #33ff66, #33ccff);
+            bottom: 15%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .decoration:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #9933ff, #ff33cc);
+            top: 20%;
+            right: 15%;
+            animation-delay: 4s;
+        }
+        
+        .decoration:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ffcc33, #ff3366);
+            bottom: 25%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .maya-text {
+                font-size: 22vw;
+            }
+            
+            .sub-text {
+                font-size: 4vw;
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+        
+        /* Эффект свечения при клике */
+        .click-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: ripple 0.8s ease-out;
+            z-index: 3;
+        }
+        
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.8;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Декоративные элементы -->
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    <div class="decoration"></div>
+    
+    <div class="main-container">
+        <div class="maya-text">МАЙЯ</div>
+        <div class="sub-text">у тебя ахуенные губы</div>
+    </div>
+    
+    <script>
+        // Добавляем эффект при клике
+        document.addEventListener('click', function(e) {
+            // Создаем элемент эффекта
+            const effect = document.createElement('div');
+            effect.classList.add('click-effect');
+            
+            // Позиционируем элемент по месту клика
+            effect.style.left = `${e.pageX}px`;
+            effect.style.top = `${e.pageY}px`;
+            
+            // Добавляем элемент на страницу
+            document.body.appendChild(effect);
+            
+            // Удаляем элемент после завершения анимации
+            setTimeout(() => {
+                effect.remove();
+            }, 800);
+            
+            // Случайное изменение скорости градиента при клике
+            const mayaText = document.querySelector('.maya-text');
+            const currentDuration = parseFloat(getComputedStyle(mayaText).animationDuration);
+            const newDuration = 5 + Math.random() * 6; // от 5 до 11 секунд
+            
+            mayaText.style.animationDuration = `${newDuration}s`;
+            
+            // Меняем цвет подписи при клике
+            const subText = document.querySelector('.sub-text');
+            const colors = ['#333', '#ff3366', '#33ccff', '#9933ff', '#ff9933'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            subText.style.color = randomColor;
+            
+            // Возвращаем цвет через секунду
+            setTimeout(() => {
+                subText.style.color = '#333';
+            }, 1000);
+        });
+        
+        // Эффект параллакса для декоративных элементов
+        document.addEventListener('mousemove', function(e) {
+            const decorations = document.querySelectorAll('.decoration');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            decorations.forEach((decoration, index) => {
+                const speed = 0.05 + (index * 0.02);
+                const x = (mouseX - 0.5) * 100 * speed;
+                const y = (mouseY - 0.5) * 100 * speed;
+                
+                decoration.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
