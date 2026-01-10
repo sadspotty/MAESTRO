@@ -3,241 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>МАЙЯ</title>
+    <title>Ася и Маша</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffffff;
             min-height: 100vh;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             position: relative;
         }
         
-        .main-container {
-            text-align: center;
-            z-index: 2;
-            padding: 20px;
+        /* Анимированный фон */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        .maya-text {
-            font-size: 18vw;
-            font-weight: 900;
-            letter-spacing: 0.05em;
-            background: linear-gradient(45deg, 
-                #ff3366, #ff9933, #ffcc33, 
-                #33ff66, #33ccff, #9933ff, 
-                #ff33cc, #ff3366);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: gradientShift 8s ease infinite;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            line-height: 1;
-            margin-bottom: 30px;
+        /* Дополнительные анимированные элементы фона */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
         }
         
-        .sub-text {
-            font-size: 2.5vw;
-            color: #333;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            opacity: 0.9;
-            margin-top: 20px;
-            transition: all 0.5s ease;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 10px 20px;
-            border-radius: 50px;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .sub-text:hover {
-            transform: scale(1.05);
-            opacity: 1;
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-        
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        
-        /* Декоративные элементы для красоты */
-        .decoration {
+        .element {
             position: absolute;
             border-radius: 50%;
-            z-index: 1;
-            opacity: 0.3;
-            animation: float 15s infinite ease-in-out;
+            background: rgba(255, 255, 255, 0.2);
+            animation: float 15s infinite linear;
         }
         
-        .decoration:nth-child(1) {
+        .element:nth-child(1) {
             width: 80px;
             height: 80px;
-            background: linear-gradient(45deg, #ff3366, #ff9933);
             top: 10%;
             left: 10%;
             animation-delay: 0s;
+            background: rgba(255, 154, 158, 0.3);
         }
         
-        .decoration:nth-child(2) {
+        .element:nth-child(2) {
             width: 120px;
             height: 120px;
-            background: linear-gradient(45deg, #33ff66, #33ccff);
-            bottom: 15%;
-            right: 10%;
+            top: 70%;
+            left: 80%;
             animation-delay: 2s;
+            background: rgba(161, 196, 253, 0.3);
         }
         
-        .decoration:nth-child(3) {
+        .element:nth-child(3) {
             width: 60px;
             height: 60px;
-            background: linear-gradient(45deg, #9933ff, #ff33cc);
             top: 20%;
-            right: 15%;
+            left: 85%;
             animation-delay: 4s;
+            background: rgba(250, 208, 196, 0.4);
         }
         
-        .decoration:nth-child(4) {
+        .element:nth-child(4) {
             width: 100px;
             height: 100px;
-            background: linear-gradient(45deg, #ffcc33, #ff3366);
-            bottom: 25%;
+            top: 80%;
             left: 15%;
             animation-delay: 6s;
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .element:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            top: 40%;
+            left: 5%;
+            animation-delay: 8s;
+            background: rgba(255, 154, 158, 0.4);
         }
         
         @keyframes float {
-            0%, 100% {
+            0% {
                 transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
             }
-            33% {
-                transform: translateY(-30px) rotate(120deg);
+            25% {
+                transform: translateY(-20px) rotate(90deg);
             }
-            66% {
-                transform: translateY(20px) rotate(240deg);
+            50% {
+                transform: translateY(0) rotate(180deg);
+                opacity: 1;
+            }
+            75% {
+                transform: translateY(20px) rotate(270deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.7;
+            }
+        }
+        
+        /* Основной текст */
+        .main-text {
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+        }
+        
+        .main-text h1 {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .main-text h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes textGlow {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(255, 119, 140, 0.7));
+            }
+            100% {
+                filter: drop-shadow(0 0 20px rgba(255, 126, 179, 0.9));
+            }
+        }
+        
+        /* Строка с комплиментами */
+        .compliments-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .compliments-track {
+            display: flex;
+            white-space: nowrap;
+            animation: scrollText 40s linear infinite;
+        }
+        
+        .compliment {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 30px;
+            font-size: 1.8rem;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .compliment i {
+            margin-right: 10px;
+            color: #ff7eb3;
+        }
+        
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Сердечки */
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 126, 179, 0.7);
+            opacity: 0;
+            animation: fall 10s linear infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                opacity: 0;
+                transform: translateX(100px) rotate(360deg);
             }
         }
         
         /* Адаптивность */
         @media (max-width: 768px) {
-            .maya-text {
-                font-size: 22vw;
+            .main-text h1 {
+                font-size: 3.5rem;
             }
             
-            .sub-text {
-                font-size: 4vw;
+            .main-text h2 {
+                font-size: 1.8rem;
             }
             
-            .decoration {
-                display: none;
+            .compliment {
+                font-size: 1.4rem;
+                padding: 0 20px;
             }
         }
         
-        /* Эффект свечения при клике */
-        .click-effect {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            animation: ripple 0.8s ease-out;
-            z-index: 3;
-        }
-        
-        @keyframes ripple {
-            0% {
-                width: 0;
-                height: 0;
-                opacity: 0.8;
+        @media (max-width: 480px) {
+            .main-text h1 {
+                font-size: 2.5rem;
             }
-            100% {
-                width: 300px;
-                height: 300px;
-                opacity: 0;
+            
+            .main-text h2 {
+                font-size: 1.5rem;
+            }
+            
+            .compliment {
+                font-size: 1.2rem;
+                padding: 0 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Декоративные элементы -->
-    <div class="decoration"></div>
-    <div class="decoration"></div>
-    <div class="decoration"></div>
-    <div class="decoration"></div>
-    
-    <div class="main-container">
-        <div class="maya-text">МАЙЯ</div>
-        <div class="sub-text">у тебя ахуенные губы</div>
+    <!-- Анимированные элементы фона -->
+    <div class="bg-elements">
+        <div class="element"></div>
+        <div class="element"></div>
+        <div class="element"></div>
+        <div class="element"></div>
+        <div class="element"></div>
     </div>
     
+    <!-- Плавающие сердечки -->
+    <div class="hearts" id="heartsContainer"></div>
+    
+    <!-- Основной текст -->
+    <div class="main-text">
+        <h1>Ася и Мафаня</h1>
+        <h2>Две замечательные девушки</h2>
+    </div>
+    
+    <!-- Строка с комплиментами -->
+    <div class="compliments-container">
+        <div class="compliments-track">
+            <!-- Комплименты будут добавляться через JavaScript -->
+        </div>
+    </div>
+
     <script>
-        // Добавляем эффект при клике
-        document.addEventListener('click', function(e) {
-            // Создаем элемент эффекта
-            const effect = document.createElement('div');
-            effect.classList.add('click-effect');
+        // Создаем плавающие сердечки
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartCount = 25;
             
-            // Позиционируем элемент по месту клика
-            effect.style.left = `${e.pageX}px`;
-            effect.style.top = `${e.pageY}px`;
-            
-            // Добавляем элемент на страницу
-            document.body.appendChild(effect);
-            
-            // Удаляем элемент после завершения анимации
-            setTimeout(() => {
-                effect.remove();
-            }, 800);
-            
-            // Случайное изменение скорости градиента при клике
-            const mayaText = document.querySelector('.maya-text');
-            const currentDuration = parseFloat(getComputedStyle(mayaText).animationDuration);
-            const newDuration = 5 + Math.random() * 6; // от 5 до 11 секунд
-            
-            mayaText.style.animationDuration = `${newDuration}s`;
-            
-            // Меняем цвет подписи при клике
-            const subText = document.querySelector('.sub-text');
-            const colors = ['#333', '#ff3366', '#33ccff', '#9933ff', '#ff9933'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            subText.style.color = randomColor;
-            
-            // Возвращаем цвет через секунду
-            setTimeout(() => {
-                subText.style.color = '#333';
-            }, 1000);
-        });
-        
-        // Эффект параллакса для декоративных элементов
-        document.addEventListener('mousemove', function(e) {
-            const decorations = document.querySelectorAll('.decoration');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            decorations.forEach((decoration, index) => {
-                const speed = 0.05 + (index * 0.02);
-                const x = (mouseX - 0.5) * 100 * speed;
-                const y = (mouseY - 0.5) * 100 * speed;
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
                 
-                decoration.style.transform = `translate(${x}px, ${y}px)`;
+                // Случайная позиция и задержка
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Список комплиментов
+        const compliments = [
+            { icon: 'fas fa-heart', text: 'Красивая' },
+            { icon: 'fas fa-star', text: 'Яркая' },
+            { icon: 'fas fa-sun', text: 'Солнечная' },
+            { icon: 'fas fa-gem', text: 'Бриллиантовая' },
+            { icon: 'fas fa-smile', text: 'Улыбчивая' },
+            { icon: 'fas fa-feather-alt', text: 'Нежная' },
+            { icon: 'fas fa-magic', text: 'Волшебная' },
+            { icon: 'fas fa-crown', text: 'Великолепная' },
+            { icon: 'fas fa-moon', text: 'Загадочная' },
+            { icon: 'fas fa-cloud', text: 'Воздушная' },
+            { icon: 'fas fa-music', text: 'Мелодичная' },
+            { icon: 'fas fa-palette', text: 'Креативная' },
+            { icon: 'fas fa-bolt', text: 'Энергичная' },
+            { icon: 'fas fa-glasses', text: 'Умная' },
+            { icon: 'fas fa-laugh', text: 'Веселая' },
+            { icon: 'fas fa-hand-sparkles', text: 'Очаровательная' },
+            { icon: 'fas fa-flower', text: 'Цветущая' },
+            { icon: 'fas fa-butterfly', text: 'Грациозная' },
+            { icon: 'fas fa-rainbow', text: 'Разнообразная' },
+            { icon: 'fas fa-sparkles', text: 'Сияющая' }
+        ];
+        
+        // Добавляем комплименты в бегущую строку
+        function addCompliments() {
+            const track = document.querySelector('.compliments-track');
+            
+            // Добавляем комплименты дважды для плавной бесконечной анимации
+            for (let i = 0; i < 2; i++) {
+                compliments.forEach(compliment => {
+                    const complimentEl = document.createElement('div');
+                    complimentEl.classList.add('compliment');
+                    complimentEl.innerHTML = `<i class="${compliment.icon}"></i><span>${compliment.text}</span>`;
+                    track.appendChild(complimentEl);
+                });
+            }
+        }
+        
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            createHearts();
+            addCompliments();
+            
+            // Добавляем эффект при наведении на основной текст
+            const mainText = document.querySelector('.main-text h1');
+            mainText.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            mainText.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
             });
         });
     </script>
