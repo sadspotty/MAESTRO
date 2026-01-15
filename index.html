@@ -3,924 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ася и Маша</title>
+    <title>MAESTRO - Эдуард Макеев</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
-        
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --gradient-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            --card-bg: #111111;
+            --accent-color: #00ff41;
+            --accent-glow: 0 0 10px rgba(0, 255, 65, 0.7);
+            --text-color: #f0f0f0;
+            --muted-text: #888;
+        }
+
         body {
-            min-height: 100vh;
-            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: #fff;
+            background: var(--gradient-bg);
+            color: var(--text-color);
             overflow-x: hidden;
-            position: relative;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            min-height: 100vh;
         }
-        
-        /* Анимированный фон */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Дополнительные анимированные элементы фона */
-        .bg-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .element {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            animation: float 15s infinite linear;
-        }
-        
-        .element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-            background: rgba(255, 154, 158, 0.3);
-        }
-        
-        .element:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 70%;
-            left: 80%;
-            animation-delay: 2s;
-            background: rgba(161, 196, 253, 0.3);
-        }
-        
-        .element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 20%;
-            left: 85%;
-            animation-delay: 4s;
-            background: rgba(250, 208, 196, 0.4);
-        }
-        
-        .element:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 80%;
-            left: 15%;
-            animation-delay: 6s;
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
-        .element:nth-child(5) {
-            width: 70px;
-            height: 70px;
-            top: 40%;
-            left: 5%;
-            animation-delay: 8s;
-            background: rgba(255, 154, 158, 0.4);
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.7;
-            }
-            25% {
-                transform: translateY(-20px) rotate(90deg);
-            }
-            50% {
-                transform: translateY(0) rotate(180deg);
-                opacity: 1;
-            }
-            75% {
-                transform: translateY(20px) rotate(270deg);
-            }
-            100% {
-                transform: translateY(0) rotate(360deg);
-                opacity: 0.7;
-            }
-        }
-        
-        /* Основной контейнер */
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
+        }
+
+        /* Герой секция */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-        }
-        
-        /* Основной текст */
-        .main-text {
             text-align: center;
-            padding: 20px;
-            z-index: 1;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-        }
-        
-        .main-text h1 {
-            font-size: 4.5rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
             position: relative;
-            display: inline-block;
-            animation: textGlow 3s ease-in-out infinite alternate;
+            overflow: hidden;
+            background: var(--gradient-bg);
         }
-        
-        .main-text h2 {
-            font-size: 2rem;
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(30, 30, 30, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(40, 40, 40, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(20, 20, 20, 0.7) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .main-title {
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 20px;
+            position: relative;
+            animation: titleGlow 3s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 65, 0.7); }
+            100% { text-shadow: 0 0 20px rgba(0, 255, 65, 0.9), 0 0 30px rgba(0, 255, 65, 0.5); }
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: var(--muted-text);
+            letter-spacing: 0.1em;
+            margin-top: 10px;
             font-weight: 300;
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.9);
         }
-        
-        @keyframes textGlow {
-            0% {
-                filter: drop-shadow(0 0 5px rgba(255, 119, 140, 0.7));
-            }
-            100% {
-                filter: drop-shadow(0 0 20px rgba(255, 126, 179, 0.9));
-            }
-        }
-        
-        /* Рулетка */
-        .roulette-section {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            width: 100%;
-            max-width: 800px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .roulette-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            color: #fff;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-        
-        .roulette-container {
+
+        /* Секции с фото */
+        .photo-section {
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 25px;
-        }
-        
-        .roulette-wheel {
-            width: 100%;
-            height: 120px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .roulette-track {
-            display: flex;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            transition: transform 0.1s linear;
-        }
-        
-        .roulette-item {
-            height: 100%;
-            min-width: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .roulette-item.active {
-            background: rgba(255, 126, 179, 0.4);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 126, 179, 0.7);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-        
-        .roulette-item i {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #ff7eb3;
-        }
-        
-        .roulette-item span {
-            font-size: 1.5rem;
-            font-weight: 600;
-            text-align: center;
-        }
-        
-        .center-line {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: #ffeb3b;
-            box-shadow: 0 0 10px #ffeb3b;
-            z-index: 10;
-        }
-        
-        .center-line::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 15px solid #ffeb3b;
-        }
-        
-        .center-line::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 15px solid #ffeb3b;
-        }
-        
-        /* Результат */
-        .result-container {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            width: 100%;
-            min-height: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 80px 0;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
+            transform: translateX(-100px);
+            transition: all 1s ease-out;
+            background: var(--gradient-bg);
         }
-        
-        .result-container.show {
+
+        .photo-section.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
-        
-        .result-title {
+
+        .photo-section.right {
+            transform: translateX(100px);
+        }
+
+        .photo-section.right.active {
+            transform: translateX(0);
+        }
+
+        .photo-container {
+            flex: 0 0 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo {
+            width: 500px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), var(--accent-glow);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            border: 2px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 255, 65, 0.6);
+        }
+
+        .text-container {
+            flex: 0 0 60%;
+            padding: 0 60px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            text-shadow: var(--accent-glow);
+            font-weight: 700;
+        }
+
+        .section-text {
             font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            color: var(--text-color);
+            font-weight: 300;
         }
-        
-        .result {
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Секция с ссылкой */
+        .link-section {
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 15px;
+            text-align: center;
+            padding: 100px 0;
+            background: var(--gradient-bg);
         }
-        
-        .result-icon {
-            font-size: 3.5rem;
-            color: #ff7eb3;
-            animation: bounce 1s infinite alternate;
-        }
-        
-        .result-text {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-        
-        /* Кнопка */
-        .spin-button {
-            padding: 18px 50px;
-            font-size: 1.5rem;
-            font-weight: 600;
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 126, 179, 0.4);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .spin-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 126, 179, 0.6);
-            background: linear-gradient(to right, #ff7eb3, #ff758c);
-        }
-        
-        .spin-button:active {
-            transform: translateY(1px);
-            box-shadow: 0 3px 10px rgba(255, 126, 179, 0.4);
-        }
-        
-        .spin-button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        /* Строка с комплиментами */
-        .compliments-container {
-            position: fixed;
-            bottom: 0;
+
+        .link-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
             left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-            padding: 20px 0;
-            overflow: hidden;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 100;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
         }
-        
-        .compliments-track {
-            display: flex;
-            white-space: nowrap;
-            animation: scrollText 40s linear infinite;
-        }
-        
-        .compliment {
+
+        .telegram-link {
             display: inline-flex;
             align-items: center;
-            padding: 0 30px;
-            font-size: 1.8rem;
-            color: #fff;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            background-color: var(--accent-color);
+            color: #000;
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 25px 50px;
+            border-radius: 50px;
+            margin-top: 60px;
+            transition: all 0.3s ease;
+            box-shadow: var(--accent-glow);
+            animation: pulseButton 2s infinite alternate;
+            border: 2px solid transparent;
         }
-        
-        .compliment i {
-            margin-right: 10px;
-            color: #ff7eb3;
+
+        .telegram-link:hover {
+            background-color: #000;
+            color: var(--accent-color);
+            transform: translateY(-8px);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.9);
+            border-color: var(--accent-color);
         }
-        
-        @keyframes scrollText {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+
+        @keyframes pulseButton {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
         }
-        
-        /* Сердечки */
-        .hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+
+        .telegram-link i {
+            margin-right: 20px;
+            font-size: 2.5rem;
         }
-        
-        .heart {
+
+        .footer {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--muted-text);
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            background: rgba(10, 10, 10, 0.9);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
             position: absolute;
-            font-size: 1.5rem;
-            color: rgba(255, 126, 179, 0.7);
-            opacity: 0;
-            animation: fall 10s linear infinite;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
         }
-        
-        @keyframes fall {
-            0% {
-                top: -10%;
-                opacity: 0;
-                transform: translateX(0) rotate(0deg);
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                top: 110%;
-                opacity: 0;
-                transform: translateX(100px) rotate(360deg);
-            }
-        }
-        
+
         /* Адаптивность */
-        @media (max-width: 768px) {
-            .main-text h1 {
-                font-size: 3.5rem;
+        @media (max-width: 1100px) {
+            .photo {
+                width: 450px;
+                height: 450px;
             }
             
-            .main-text h2 {
-                font-size: 1.8rem;
+            .main-title {
+                font-size: 5rem;
             }
             
-            .roulette-title {
-                font-size: 1.8rem;
-            }
-            
-            .roulette-item {
-                min-width: 180px;
-            }
-            
-            .roulette-item i {
-                font-size: 2rem;
-            }
-            
-            .roulette-item span {
-                font-size: 1.3rem;
-            }
-            
-            .result-text {
-                font-size: 2rem;
-            }
-            
-            .spin-button {
-                padding: 15px 40px;
-                font-size: 1.3rem;
-            }
-            
-            .compliment {
-                font-size: 1.4rem;
-                padding: 0 20px;
+            .text-container {
+                padding: 0 40px;
             }
         }
-        
-        @media (max-width: 480px) {
-            .main-text h1 {
-                font-size: 2.8rem;
+
+        @media (max-width: 900px) {
+            .photo-section {
+                flex-direction: column;
+                padding: 60px 0;
+                text-align: center;
             }
             
-            .main-text h2 {
+            .photo-section.right {
+                flex-direction: column-reverse;
+            }
+            
+            .photo-container {
+                flex: 0 0 auto;
+                margin-bottom: 40px;
+            }
+            
+            .text-container {
+                flex: 0 0 auto;
+                padding: 0 30px;
+            }
+            
+            .photo {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+            
+            .section-text {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 4rem;
+                letter-spacing: 0.1em;
+            }
+            
+            .subtitle {
                 font-size: 1.5rem;
             }
             
-            .roulette-section {
-                padding: 20px;
+            .photo {
+                width: 350px;
+                height: 350px;
             }
             
-            .roulette-title {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-text {
+                font-size: 1.3rem;
+            }
+            
+            .telegram-link {
                 font-size: 1.5rem;
+                padding: 20px 40px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .main-title {
+                font-size: 3rem;
             }
             
-            .roulette-wheel {
-                height: 100px;
+            .subtitle {
+                font-size: 1.3rem;
             }
             
-            .roulette-item {
-                min-width: 160px;
+            .photo {
+                width: 300px;
+                height: 300px;
             }
             
-            .roulette-item i {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-text {
+                font-size: 1.2rem;
+            }
+            
+            .telegram-link {
+                font-size: 1.3rem;
+                padding: 18px 35px;
+            }
+            
+            .telegram-link i {
                 font-size: 1.8rem;
-            }
-            
-            .roulette-item span {
-                font-size: 1.2rem;
-            }
-            
-            .result-text {
-                font-size: 1.8rem;
-            }
-            
-            .spin-button {
-                padding: 12px 30px;
-                font-size: 1.2rem;
-            }
-            
-            .compliment {
-                font-size: 1.2rem;
-                padding: 0 15px;
+                margin-right: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Анимированные элементы фона -->
-    <div class="bg-elements">
-        <div class="element"></div>
-        <div class="element"></div>
-        <div class="element"></div>
-        <div class="element"></div>
-        <div class="element"></div>
-    </div>
-    
-    <!-- Плавающие сердечки -->
-    <div class="hearts" id="heartsContainer"></div>
-    
-    <!-- Основной контейнер -->
-    <div class="container">
-        <!-- Основной текст -->
-        <div class="main-text">
-            <h1>Ася и Маша</h1>
-            <h2>Две замечательные девушки</h2>
-        </div>
-        
-        <!-- Рулетка -->
-        <div class="roulette-section">
-            <h2 class="roulette-title">Проверь, какая ты сегодня</h2>
-            
-            <div class="roulette-container">
-                <div class="roulette-wheel" id="rouletteWheel">
-                    <div class="roulette-track" id="rouletteTrack">
-                        <!-- Рулетка будет заполнена через JavaScript -->
-                    </div>
-                    <div class="center-line"></div>
-                </div>
-                
-                <div class="result-container" id="resultContainer">
-                    <div class="result">
-                        <div class="result-icon" id="resultIcon"></div>
-                        <div class="result-text" id="resultText"></div>
-                    </div>
-                </div>
-                
-                <button class="spin-button" id="spinButton">
-                    <i class="fas fa-redo-alt"></i>
-                    <span>Крутить еще</span>
-                </button>
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="main-title">MAESTRO</h1>
+            <p class="subtitle">Эдуард Макеев</p>
+            <div style="margin-top: 60px;">
+                <i class="fas fa-chevron-down" style="font-size: 2.5rem; color: var(--accent-color); cursor: pointer;"></i>
             </div>
         </div>
-    </div>
-    
-    <!-- Строка с комплиментами -->
-    <div class="compliments-container">
-        <div class="compliments-track" id="complimentsTrack">
-            <!-- Комплименты будут добавляться через JavaScript -->
+    </section>
+
+    <!-- Первая секция с фото -->
+    <section class="photo-section" id="section1">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="photo-container">
+                <img src="1ed.png" alt="MAESTRO Эдуард Макеев" class="photo">
+            </div>
+            <div class="text-container">
+                <h2 class="section-title">MAESTRO</h2>
+                <p class="section-text">
+                    <span class="highlight">Эдуард Макеев</span> приглашает вас на участие в своём большом конкурсе. 
+                    Это уникальная возможность проявить свои таланты и побороться за ценные призы. 
+                    Станьте частью эксклюзивного сообщества MAESTRO.
+                </p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Вторая секция с фото -->
+    <section class="photo-section right" id="section2">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="text-container">
+                <h2 class="section-title">Реальные призы</h2>
+                <p class="section-text">
+                    Получи возможность выиграть <span class="highlight">Реальные деньги, Telegram Premium и звёзды</span>. 
+                    Каждый участник имеет шанс на победу, независимо от опыта и уровня подготовки. 
+                    Призовой фонд конкурса обновляется ежедневно.
+                </p>
+            </div>
+            <div class="photo-container">
+                <img src="2ed.png" alt="Призы конкурса" class="photo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Третья секция с фото -->
+    <section class="photo-section" id="section3">
+        <div class="container" style="display: flex; align-items: center; justify-content: space-between;">
+            <div class="photo-container">
+                <img src="3ed.png" alt="Условия конкурса" class="photo">
+            </div>
+            <div class="text-container">
+                <h2 class="section-title">Просто и понятно</h2>
+                <p class="section-text">
+                    Условия просты, как никогда раньше. Просто подпишись на Телеграмм канал по ссылке ниже 
+                    и следи за обновлениями. Участие абсолютно бесплатное! 
+                    Остальное — дело техники и вашего таланта.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с ссылкой -->
+    <section class="link-section">
+        <div class="container">
+            <h2 class="section-title">Присоединяйся сейчас!</h2>
+            <p class="section-text" style="max-width: 900px; margin: 0 auto; font-size: 1.6rem;">
+                Не упусти свой шанс стать частью большого события. Подпишись на канал MAESTRO, 
+                чтобы быть в курсе всех деталей конкурса и получить возможность выиграть ценные призы.
+            </p>
+            
+            <a href="https://t.me/makeev_03_01" target="_blank" class="telegram-link">
+                <i class="fab fa-telegram"></i>
+                https://t.me/makeev_03_01
+            </a>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <p style="font-size: 1.2rem; margin-bottom: 10px;">© 2026 MAESTRO - Эдуард Макеев</p>
+            <p style="font-size: 1rem; color: var(--accent-color);">Все права защищены</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: var(--muted-text);">Сайт создан для фанатов и участников конкурса</p>
+        </div>
+    </footer>
 
     <script>
-        // Создаем плавающие сердечки
-        function createHearts() {
-            const heartsContainer = document.getElementById('heartsContainer');
-            const heartCount = 25;
-            
-            for (let i = 0; i < heartCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerHTML = '<i class="fas fa-heart"></i>';
-                
-                // Случайная позиция и задержка
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = Math.random() * 10 + 's';
-                heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
-                
-                heartsContainer.appendChild(heart);
-            }
-        }
-        
-        // ОГРОМНЫЙ список комплиментов для рулетки (70+ вариантов)
-        const compliments = [
-            { icon: 'fas fa-heart', text: 'Красивая' },
-            { icon: 'fas fa-star', text: 'Яркая' },
-            { icon: 'fas fa-sun', text: 'Солнечная' },
-            { icon: 'fas fa-gem', text: 'Бриллиантовая' },
-            { icon: 'fas fa-smile', text: 'Улыбчивая' },
-            { icon: 'fas fa-feather-alt', text: 'Нежная' },
-            { icon: 'fas fa-magic', text: 'Волшебная' },
-            { icon: 'fas fa-crown', text: 'Великолепная' },
-            { icon: 'fas fa-moon', text: 'Загадочная' },
-            { icon: 'fas fa-cloud', text: 'Воздушная' },
-            { icon: 'fas fa-music', text: 'Мелодичная' },
-            { icon: 'fas fa-palette', text: 'Креативная' },
-            { icon: 'fas fa-bolt', text: 'Энергичная' },
-            { icon: 'fas fa-glasses', text: 'Умная' },
-            { icon: 'fas fa-laugh', text: 'Веселая' },
-            { icon: 'fas fa-hand-sparkles', text: 'Очаровательная' },
-            { icon: 'fas fa-flower', text: 'Цветущая' },
-            { icon: 'fas fa-butterfly', text: 'Грациозная' },
-            { icon: 'fas fa-rainbow', text: 'Разнообразная' },
-            { icon: 'fas fa-sparkles', text: 'Сияющая' },
-            { icon: 'fas fa-heartbeat', text: 'Страстная' },
-            { icon: 'fas fa-comments', text: 'Общительная' },
-            { icon: 'fas fa-lightbulb', text: 'Гениальная' },
-            { icon: 'fas fa-trophy', text: 'Победительница' },
-            { icon: 'fas fa-globe', text: 'Интересная' },
-            { icon: 'fas fa-rocket', text: 'Амбициозная' },
-            { icon: 'fas fa-film', text: 'Артистичная' },
-            { icon: 'fas fa-book', text: 'Начитанная' },
-            { icon: 'fas fa-code', text: 'Техничная' },
-            { icon: 'fas fa-camera', text: 'Фотогеничная' },
-            { icon: 'fas fa-coffee', text: 'Бодрая' },
-            { icon: 'fas fa-cookie-bite', text: 'Вкусная' },
-            { icon: 'fas fa-dove', text: 'Миролюбивая' },
-            { icon: 'fas fa-feather', text: 'Легкая' },
-            { icon: 'fas fa-fire', text: 'Пылкая' },
-            { icon: 'fas fa-guitar', text: 'Творческая' },
-            { icon: 'fas fa-hands-helping', text: 'Заботливая' },
-            { icon: 'fas fa-hat-wizard', text: 'Магическая' },
-            { icon: 'fas fa-ice-cream', text: 'Сладкая' },
-            { icon: 'fas fa-journal-whills', text: 'Мудрая' },
-            { icon: 'fas fa-key', text: 'Уникальная' },
-            { icon: 'fas fa-laugh-beam', text: 'Счастливая' },
-            { icon: 'fas fa-medal', text: 'Лучшая' },
-            { icon: 'fas fa-peace', text: 'Спокойная' },
-            { icon: 'fas fa-puzzle-piece', text: 'Загадочная' },
-            { icon: 'fas fa-seedling', text: 'Растущая' },
-            { icon: 'fas fa-snowflake', text: 'Искренняя' },
-            { icon: 'fas fa-theater-masks', text: 'Разная' },
-            { icon: 'fas fa-umbrella-beach', text: 'Отдыхающая' },
-            { icon: 'fas fa-video', text: 'Динамичная' },
-            { icon: 'fas fa-wind', text: 'Свободная' },
-            { icon: 'fas fa-yin-yang', text: 'Гармоничная' },
-            { icon: 'fas fa-ankh', text: 'Вечная' },
-            { icon: 'fas fa-atom', text: 'Энергичная' },
-            { icon: 'fas fa-award', text: 'Награждаемая' },
-            { icon: 'fas fa-bahai', text: 'Духовная' },
-            { icon: 'fas fa-bell', text: 'Заметная' },
-            { icon: 'fas fa-birthday-cake', text: 'Праздничная' },
-            { icon: 'fas fa-brain', text: 'Интеллектуальная' },
-            { icon: 'fas fa-cat', text: 'Игривая' },
-            { icon: 'fas fa-chart-line', text: 'Успешная' },
-            { icon: 'fas fa-chess-queen', text: 'Королевская' },
-            { icon: 'fas fa-compass', text: 'Целеустремленная' },
-            { icon: 'fas fa-dragon', text: 'Сильная' },
-            { icon: 'fas fa-eye', text: 'Внимательная' },
-            { icon: 'fas fa-fish', text: 'Гибкая' },
-            { icon: 'fas fa-graduation-cap', text: 'Образованная' },
-            { icon: 'fas fa-hiking', text: 'Активная' },
-            { icon: 'fas fa-infinity', text: 'Бесконечная' },
-            { icon: 'fas fa-kiss-wink-heart', text: 'Сексуальная' },
-            { icon: 'fas fa-laptop-code', text: 'Современная' },
-            { icon: 'fas fa-mask', text: 'Таинственная' },
-            { icon: 'fas fa-meteor', text: 'Ослепительная' },
-            { icon: 'fas fa-mountain', text: 'Непоколебимая' },
-            { icon: 'fas fa-paint-brush', text: 'Художественная' }
-        ];
-        
-        // Переменные для рулетки
-        let isSpinning = false;
-        let currentPosition = 0;
-        let selectedCompliment = null;
-        
-        // Инициализация рулетки
-        function initRoulette() {
-            const track = document.getElementById('rouletteTrack');
-            
-            // Добавляем много элементов для плавной прокрутки
-            // Создаем 3 копии массива комплиментов для бесконечного эффекта
-            for (let i = 0; i < 3; i++) {
-                compliments.forEach((compliment, index) => {
-                    const item = document.createElement('div');
-                    item.classList.add('roulette-item');
-                    item.dataset.index = index; // Сохраняем индекс комплимента
-                    item.innerHTML = `<i class="${compliment.icon}"></i><span>${compliment.text}</span>`;
-                    track.appendChild(item);
-                });
-            }
-            
-            // Устанавливаем начальную ширину трека
-            const itemWidth = 200; // Примерная ширина элемента
-            track.style.width = (compliments.length * 3 * itemWidth) + 'px';
-        }
-        
-        // Запуск рулетки
-        function spinRoulette() {
-            if (isSpinning) return;
-            
-            isSpinning = true;
-            const button = document.getElementById('spinButton');
-            const resultContainer = document.getElementById('resultContainer');
-            const track = document.getElementById('rouletteTrack');
-            
-            // Скрываем предыдущий результат
-            resultContainer.classList.remove('show');
-            
-            // Блокируем кнопку
-            button.disabled = true;
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Крутится...</span>';
-            
-            // Случайное замедление и остановка
-            const spinDuration = 3000 + Math.random() * 2000; // 3-5 секунд
-            const itemWidth = 200; // Ширина элемента
-            const itemsCount = compliments.length * 3;
-            
-            // Случайно выбираем комплимент для остановки
-            const selectedIndex = Math.floor(Math.random() * compliments.length);
-            selectedCompliment = compliments[selectedIndex];
-            
-            // Рассчитываем позицию для остановки так, чтобы выбранный комплимент оказался по центру
-            // Центральный элемент должен быть примерно в середине второй копии массива
-            const centerOffset = window.innerWidth / 2 - itemWidth / 2;
-            const targetPosition = -((compliments.length * itemWidth) + (selectedIndex * itemWidth) - centerOffset);
-            
-            // Начальная позиция (немного отступаем для эффекта разгона)
-            currentPosition = 0;
-            
-            // Анимация вращения с замедлением
-            const startTime = Date.now();
-            const startPosition = currentPosition;
-            
-            function animate() {
-                const elapsed = Date.now() - startTime;
-                const progress = Math.min(elapsed / spinDuration, 1);
-                
-                // Кривая замедления (ease-out)
-                const easeOut = 1 - Math.pow(1 - progress, 3);
-                
-                // Плавное движение к цели
-                currentPosition = startPosition + (targetPosition - startPosition) * easeOut;
-                
-                // Применяем трансформацию
-                track.style.transform = `translateX(${currentPosition}px)`;
-                
-                // Обновляем активный элемент
-                updateActiveItem();
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    // Завершение вращения
-                    finishSpin();
-                }
-            }
-            
-            // Запускаем анимацию
-            requestAnimationFrame(animate);
-        }
-        
-        // Обновление активного элемента
-        function updateActiveItem() {
-            const items = document.querySelectorAll('.roulette-item');
-            const centerX = window.innerWidth / 2;
-            let centerItem = null;
-            
-            items.forEach(item => {
-                const rect = item.getBoundingClientRect();
-                const itemCenter = rect.left + rect.width / 2;
-                
-                // Если элемент находится близко к центру, делаем его активным
-                if (Math.abs(itemCenter - centerX) < rect.width / 2) {
-                    item.classList.add('active');
-                    centerItem = item;
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-            
-            // Если нашли центральный элемент, обновляем выбранный комплимент
-            if (centerItem) {
-                const index = parseInt(centerItem.dataset.index);
-                selectedCompliment = compliments[index];
-            }
-        }
-        
-        // Завершение вращения
-        function finishSpin() {
-            isSpinning = false;
-            const button = document.getElementById('spinButton');
-            const resultContainer = document.getElementById('resultContainer');
-            const resultIcon = document.getElementById('resultIcon');
-            const resultText = document.getElementById('resultText');
-            
-            // Находим центральный элемент для точного определения результата
-            const items = document.querySelectorAll('.roulette-item');
-            const centerX = window.innerWidth / 2;
-            let finalCenterItem = null;
-            
-            items.forEach(item => {
-                const rect = item.getBoundingClientRect();
-                const itemCenter = rect.left + rect.width / 2;
-                
-                if (Math.abs(itemCenter - centerX) < rect.width / 2) {
-                    finalCenterItem = item;
-                }
-            });
-            
-            // Если нашли центральный элемент, используем его данные
-            if (finalCenterItem) {
-                const index = parseInt(finalCenterItem.dataset.index);
-                selectedCompliment = compliments[index];
-            }
-            
-            // Показываем результат
-            resultIcon.className = selectedCompliment.icon;
-            resultText.textContent = selectedCompliment.text;
-            
-            // Анимация появления результата
-            setTimeout(() => {
-                resultContainer.classList.add('show');
-            }, 300);
-            
-            // Разблокируем кнопку
-            setTimeout(() => {
-                button.disabled = false;
-                button.innerHTML = '<i class="fas fa-redo-alt"></i><span>Крутить еще</span>';
-            }, 500);
-            
-            // Добавляем эффект конфетти
-            createConfetti();
-        }
-        
-        // Создаем конфетти
-        function createConfetti() {
-            const colors = ['#ff758c', '#ff7eb3', '#a1c4fd', '#ff9a9e', '#fad0c4', '#ffeb3b'];
-            
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'heart';
-                confetti.innerHTML = '<i class="fas fa-star"></i>';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = '0s';
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                
-                document.getElementById('heartsContainer').appendChild(confetti);
-                
-                // Удаляем конфетти после анимации
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }
-        }
-        
-        // Добавляем комплименты в бегущую строку
-        function addComplimentsToTrack() {
-            const track = document.getElementById('complimentsTrack');
-            
-            // Добавляем комплименты дважды для плавной бесконечной анимации
-            for (let i = 0; i < 2; i++) {
-                compliments.forEach(compliment => {
-                    const complimentEl = document.createElement('div');
-                    complimentEl.classList.add('compliment');
-                    complimentEl.innerHTML = `<i class="${compliment.icon}"></i><span>${compliment.text}</span>`;
-                    track.appendChild(complimentEl);
-                });
-            }
-        }
-        
-        // Инициализация при загрузке страницы
+        // Анимация появления секций при скролле
         document.addEventListener('DOMContentLoaded', function() {
-            createHearts();
-            initRoulette();
-            addComplimentsToTrack();
+            const sections = document.querySelectorAll('.photo-section');
             
-            // Добавляем эффект при наведении на основной текст
-            const mainText = document.querySelector('.main-text h1');
-            mainText.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
-                this.style.transition = 'transform 0.3s ease';
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.2
             });
             
-            mainText.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
+            sections.forEach(section => {
+                observer.observe(section);
             });
             
-            // Обработчик кнопки
-            const spinButton = document.getElementById('spinButton');
-            spinButton.addEventListener('click', spinRoulette);
+            // Добавляем анимацию для стрелки вниз
+            const heroArrow = document.querySelector('.hero i');
+            if (heroArrow) {
+                heroArrow.style.animation = 'bounce 2s infinite';
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes bounce {
+                        0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+                        40% {transform: translateY(-20px);}
+                        60% {transform: translateY(-10px);}
+                    }
+                `;
+                document.head.appendChild(style);
+            }
             
-            // Первый автоматический спин через 2 секунды
-            setTimeout(() => {
-                if (!isSpinning) {
-                    spinRoulette();
-                }
-            }, 2000);
+            // Плавная прокрутка к первой секции при клике на стрелку
+            document.querySelector('.hero i').addEventListener('click', function() {
+                document.querySelector('#section1').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+            
+            // Плавный скролл для всех внутренних ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        document.querySelector(targetId).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
